@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const shapes = require('./lib/shapes');
+const logoMaker = require('./lib/logoMaker');
 // do I need `const jest = require('jest');` ? Is that how jest.js works? (Or do I only need it in `shapes.test.js`?)
 const introString = "Inglehart SVG generator ver.0.1.0\n------------------------------------"
 
@@ -36,7 +36,7 @@ function init() {
     console.clear(); console.log(introString);
     inquirer.prompt(logoQuestions)    
     .then((answers) => {
-        console.log(`\n Created a logo that says "${answers.wordmarkText}", written in ${answers.wordmarkColor} on a ${answers.shapeColor} ${answers.shapeShape} background.\n`);
+        logoMaker.processAnswers(answers);
     })}
 
 init();
