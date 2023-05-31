@@ -32,11 +32,23 @@ logoQuestions= [
     },
 ]
 
+
 function init() {
     console.clear(); console.log(introString);
-    inquirer.prompt(logoQuestions)    
+    inquirer.prompt(logoQuestions)
     .then((answers) => {
-        logoMaker.processAnswers(answers);
+        const backgroundShape = logoMaker.processAnswers(answers);
+        console.log(backgroundShape);
+        writeLogo(backgroundShape);
     })}
+    
+function writeLogo(backgroundShape) {
+    fs.writeFile('output.svg', backgroundShape, (err) => {
+        if (err) {
+            console.error("Fuck you, you don't even deserve a logo like that:", err);
+        } else {
+            // console.log(`\n Created a logo that says "${answers.wordmarkText}", written in ${answers.wordmarkColor} on a ${answers.shapeColor} ${answers.shapeShape} background.\n`);
+            console.log("worked");
+          }})}
 
 init();
