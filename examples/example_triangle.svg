@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="300"><polygon points="50 150, 100 50, 150 150" fill="cyan" />
+            <text fill="blue" font-size="60" x="100" y="150" text-anchor="middle">NaN</text>
+            </svg>
