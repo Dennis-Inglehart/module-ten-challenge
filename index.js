@@ -42,11 +42,11 @@ function init() {
         // instead of proper error handling, unusable inputs are reassigned arbitrary, usable values
         if(answers.wordmarkText.length > 3) {
             console.log(` "${answers.wordmarkText}" is too long. Only the first three characters (${answers.wordmarkText.substring(0, 3)}) will be used.`);
-            answers.wordmarkText = answers.wordmarkText.substring(0, 3);}                                              // <- truncates text input down to 3 characters
-        if (!numberedColors.test(answers.wordmarkText) && !namedColors.includes(answers.wordmarkText.toLowerCase())) { // <- reassigns any invalid text color choice to blue
-            console.log(` "${answers.wordmarkText}" is not a valid SVG color. You get blue text.`);
-            answers.wordmarkText = "blue";}
-        if (!numberedColors.test(answers.shapeColor) && !namedColors.includes(answers.shapeColor.toLowerCase())) {     // <- reassigns any invalid shape color choice to orange
+            answers.wordmarkText = answers.wordmarkText.substring(0, 3);}                                                // <- truncates text input down to 3 characters
+        if (!numberedColors.test(answers.wordmarkColor) && !namedColors.includes(answers.wordmarkColor.toLowerCase())) { // <- reassigns any invalid text color choice to blue
+            console.log(` "${answers.wordmarkColor}" is not a valid SVG color. You get blue text.`);
+            answers.wordmarkColor = "blue";}
+        if (!numberedColors.test(answers.shapeColor) && !namedColors.includes(answers.shapeColor.toLowerCase())) {       // <- reassigns any invalid shape color choice to orange
             console.log(` "${answers.shapeColor}" is not a valid SVG color. You get an orange background.`);
             answers.shapeColor = "orange";}
         console.log(`\n Creating a logo that says "${answers.wordmarkText}", written in ${answers.wordmarkColor} on a ${answers.shapeColor} ${answers.shapeShape} background....`);
