@@ -1,9 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const logoMaker = require('./lib/logoMaker');
-const numberedColors = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // <- used to check if user input for colors is valid
-const namedColors = require('./lib/svgColorNames');          // <- used to check if user input for colors is valid
-// do I need `const jest = require('jest');` ? Is that how jest.js works? (Or do I only need it in `shapes.test.js`?)
+const numberedColors = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // <- used to check if user input for colors is valid when hexidecimal is put in
+const namedColors = require('./lib/svgColorNames');          // <- used to check if user input for colors is valid when a name is put in
 const introString = "Inglehart SVG generator ver.0.1.0\n------------------------------------"
 
 logoQuestions= [
@@ -39,7 +38,7 @@ function init() {
     console.clear(); console.log(introString);
     inquirer.prompt(logoQuestions)
     .then((answers) => {
-        // instead of proper error handling, unusable inputs are reassigned arbitrary, usable values
+        // instead of proper error handling, invalid inputs are reassigned arbitrary, valid values
         if(answers.wordmarkText.length > 3) {
             console.log(` "${answers.wordmarkText}" is too long. Only the first three characters (${answers.wordmarkText.substring(0, 3)}) will be used.`);
             answers.wordmarkText = answers.wordmarkText.substring(0, 3);}                                                // <- truncates text input down to 3 characters
@@ -49,17 +48,17 @@ function init() {
         if (!numberedColors.test(answers.shapeColor) && !namedColors.includes(answers.shapeColor.toLowerCase())) {       // <- reassigns any invalid shape color choice to orange
             console.log(` "${answers.shapeColor}" is not a valid SVG color. You get an orange background.`);
             answers.shapeColor = "orange";}
-        console.log(`\n Creating a logo that says "${answers.wordmarkText}", written in ${answers.wordmarkColor} on a ${answers.shapeColor} ${answers.shapeShape} background....`);
+        console.log(`\n Generating a logo that says "${answers.wordmarkText}", written in ${answers.wordmarkColor} on a ${answers.shapeColor} ${answers.shapeShape} background....`);
         const backgroundShape = logoMaker.processAnswers(answers);
         writeLogo(backgroundShape);
     })}
     
 function writeLogo(backgroundShape) {
-    fs.writeFile('output.svg', backgroundShape, (err) => {
+    fs.writeFile('logo.svg', backgroundShape, (err) => {
         if (err) {
             console.error(" Something went wrong:", err);
         } else {
-            console.log(" Done.\n");
+            console.log(" Generated logo.svg\n"); // The exact words "Generated logo.svg" are part of the requirements, so don't change them
           }})}
 
 init();
