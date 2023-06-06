@@ -38,7 +38,7 @@ function init() {
     console.clear(); console.log(introString);
     inquirer.prompt(logoQuestions)
     .then((answers) => {
-        // instead of proper error handling, invalid inputs are reassigned arbitrary, valid values
+        // instead of proper error handling, invalid inputs are replaced with arbitrary, valid values
         if(answers.wordmarkText.length > 3) {
             console.log(` "${answers.wordmarkText}" is too long. Only the first three characters (${answers.wordmarkText.substring(0, 3)}) will be used.`);
             answers.wordmarkText = answers.wordmarkText.substring(0, 3);}                                                // <- truncates text input down to 3 characters
